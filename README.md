@@ -1,6 +1,7 @@
 # safebite
 
-A new Flutter project.
+Flutter project aims at  providing personalized exercise recommendations based on calorie intake, nutritional values, and allergy detection from recognized foods
+
 
 ## Getting Started
 
