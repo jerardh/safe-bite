@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "544508288601",
+    "project_id": "safe-bite-59111",
+    "storage_bucket": "safe-bite-59111.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:544508288601:android:c0604c960da47446719b48",
+        "android_client_info": {
+          "package_name": "com.example.safebite"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSOZ433sSnyHZu4D6Osx94UIm4TQQTeVA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
