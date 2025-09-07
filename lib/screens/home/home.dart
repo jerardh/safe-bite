@@ -1,6 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:safebite/screens/home/components/CalorieInfo.dart';
 import 'package:safebite/screens/home/components/imagepick.dart' as picker;
+import 'package:safebite/util/AppText.dart';
+import 'package:safebite/util/appColor.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -17,7 +19,6 @@ class HomeState extends State<Home> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(child: Calorieinfo(), height: 200),
             picker.ImagePick()
           ]),
     );

@@ -50,10 +50,7 @@ class ImageQuantityState extends State<ImageQunatity> {
           ]),
       Container(
           child: Text("grams",
-              style: TextStyle(
-                  fontSize: AppText.secondarysize,
-                  color: AppColor.primaryDarker,
-                  fontWeight: FontWeight.bold)),
+              style: AppText().hintTextStyle),
           margin: EdgeInsets.only(right: 30, top: 5))
     ]));
   }
