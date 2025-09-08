@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:safebite/firebase_options.dart';
 import 'package:safebite/screens/home/components/Heading.dart';
 import 'package:safebite/screens/home/home.dart';
+import 'package:safebite/screens/signin/signIn.dart';
 import 'package:safebite/util/util.dart';
 import 'package:safebite/util/appColor.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -24,11 +25,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-          useMaterial3: true,
-          scaffoldBackgroundColor: AppColor.background),
-      home: Scaffold(
-          appBar: AppBar(title: Heading(), backgroundColor: AppColor.primary),
-          body: Home()),
+          useMaterial3: true, scaffoldBackgroundColor: AppColor.background),
+      home: Scaffold(appBar: Util().appBar, body: SignIn()),
     );
   }
 }
