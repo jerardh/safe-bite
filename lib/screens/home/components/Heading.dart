@@ -8,8 +8,7 @@ class Heading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       AppText.title,
-      style:
-          TextStyle(color: AppColor.textPrimary, fontSize: AppText.primarySize),
+      style: AppText().primaryStyle,
     );
   }
 }

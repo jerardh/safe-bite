@@ -5,6 +5,7 @@ class AppColor {
   static const Color primary = Color(0xFFAAE59C);
   static const Color primaryDark = Color(0xFF7FC780);
   static const Color primaryDarker = Color.fromARGB(255, 87, 101, 87);
+  static const Color primaryDarkest = Color.fromARGB(255, 25, 96, 25);
 
   // Secondary colors
   static const Color secondary = Color(0xFFFFA000); // Example amber
