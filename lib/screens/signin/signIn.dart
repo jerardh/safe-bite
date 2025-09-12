@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:safebite/screens/home/home.dart';
+import 'package:safebite/util/AppText.dart';
+import 'package:safebite/util/appColor.dart';
 
 class SignIn extends StatefulWidget {
   var userName;
@@ -31,30 +33,36 @@ class SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        TextField(
-          controller: _userNameController,
-          decoration: const InputDecoration(
-            labelText: "User Name",
-          ),
-        ),
-        const SizedBox(height: 16),
-        TextField(
-          controller: _passwordController,
-          obscureText: true,
-          decoration: const InputDecoration(
-            labelText: "Password",
-          ),
-        ),
-        const SizedBox(height: 24),
-        ElevatedButton(
-          onPressed: () => {login()},
-          // onPressed: _login,
-          child: const Text("Login"),
-        ),
-      ],
-    );
+    return Padding(
+        padding: EdgeInsets.all(50.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextField(
+              controller: _userNameController,
+              decoration: const InputDecoration(
+                labelText: "User Name",
+              ),
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              controller: _passwordController,
+              obscureText: true,
+              decoration: const InputDecoration(
+                labelText: "Password",
+              ),
+            ),
+            const SizedBox(height: 24),
+            ElevatedButton(
+                onPressed: () => {login()},
+                // onPressed: _login,
+                child: const Text("Login"),
+                style: ElevatedButton.styleFrom(
+                    textStyle: AppText().textStyle,
+                    backgroundColor: AppColor.primaryDarker,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10))))),
+          ],
+        ));
   }
 }
