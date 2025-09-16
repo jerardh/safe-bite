@@ -16,6 +16,7 @@ class Home extends StatefulWidget {
 class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    print("started app");
     return Scaffold(
         appBar: Util().appBar,
         body: SingleChildScrollView(

@@ -35,7 +35,7 @@ dependencies:
   firebase_core: ^2.27.0  # (Check for latest version)
   cloud_firestore: ^4.0.0
   tflite_flutter: ^0.9.1      # latest published version as of now :contentReference[oaicite:1]{index=1}
-  tflite_flutter_helper: ^0.3.1
+  tflite_flutter_helper_plus: ^0.0.2
 
 
   # The following adds the Cupertino Icons font to your application.

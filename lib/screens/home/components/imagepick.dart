@@ -20,7 +20,7 @@ class ImagePickState extends State<ImagePick> {
     return (Padding(
         padding: EdgeInsets.all(30),
         child: SizedBox(
-            height: 500,
+            height: 600,
             width: double.infinity,
             child: Card(
                 elevation: 3,
@@ -33,10 +33,7 @@ class ImagePickState extends State<ImagePick> {
                     SizedBox(height: 20),
                     Text("Scan Your Food", style: AppText().secondaryStyle),
                     SizedBox(height: 20),
-                    SizedBox(width: 200, child: QRImagePicker()),
-                    SizedBox(height: 10),
-                    ImageQunatity(),
-                    UploadButton()
+                    SizedBox(width: 400, child: QRImagePicker()),
                   ],
                 )))));
   }
