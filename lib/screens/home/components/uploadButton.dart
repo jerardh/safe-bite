@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:safebite/screens/foodanalysis/FoodAnalysis.dart';
 import 'package:safebite/util/AppText.dart';
 import 'package:safebite/util/PreProcessImage.dart';
 import 'package:safebite/util/appColor.dart';
@@ -18,7 +19,7 @@ class UploadButton extends StatelessWidget {
         child: SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-                onPressed: () => {classifyImage()},
+                onPressed: () => {classifyImage(context)},
                 style: ElevatedButton.styleFrom(
                     backgroundColor: AppColor.primaryDarker,
                     shape: const RoundedRectangleBorder(
@@ -26,7 +27,7 @@ class UploadButton extends StatelessWidget {
                 child: Text("Find Food", style: AppText().textStyle))));
   }
 
-  Future<void> classifyImage() async {
+  Future<void> classifyImage(BuildContext context) async {
     print("Got final image");
     final url = Uri.parse("http://192.168.0.117:5000/predict");
     var request = http.MultipartRequest('POST', url);
@@ -43,6 +44,12 @@ class UploadButton extends StatelessWidget {
       String classname = data['predicted_class'];
       String probs = data['prediction_prob'].toString();
       print("FOOD_NAME" + classname + " CONFIDENCE" + probs);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => FoodAnalysis(),
+        ),
+      );
     } else {
       print("Error: ${response.statusCode}");
     }

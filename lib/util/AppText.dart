@@ -10,9 +10,9 @@ class AppText {
       color: AppColor.primaryDarkest,
       fontWeight: FontWeight.bold);
   final TextStyle secondaryStyle = GoogleFonts.lato(
-      fontSize: 25, color: AppColor.primaryDarker, fontWeight: FontWeight.w800);
+      fontSize: 30, color: AppColor.primaryDarker, fontWeight: FontWeight.w800);
   final TextStyle textStyle = GoogleFonts.lato(
       fontSize: 15, color: Colors.white, fontWeight: FontWeight.w800);
   final TextStyle hintTextStyle = GoogleFonts.lato(
-      fontSize: 20, color: AppColor.primaryDarker, fontWeight: FontWeight.w800);
+      fontSize: 15, color: AppColor.primaryDarker, fontWeight: FontWeight.w800);
 }
