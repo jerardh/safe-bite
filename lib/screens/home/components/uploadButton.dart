@@ -29,7 +29,7 @@ class UploadButton extends StatelessWidget {
 
   Future<void> classifyImage(BuildContext context) async {
     print("Got final image");
-    final url = Uri.parse("http://192.168.0.117:5000/predict");
+    final url = Uri.parse("http://192.168.29.85:5000/predict");
     var request = http.MultipartRequest('POST', url);
     request.files.add(await http.MultipartFile.fromPath(
       'image', // field name -> must match Flask's request.files['image']
@@ -47,7 +47,8 @@ class UploadButton extends StatelessWidget {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => FoodAnalysis(),
+          builder: (context) => FoodAnalysis(
+              foodname: classname, probs: data['prediction_prob'], foodImage: ImageFile),
         ),
       );
     } else {
