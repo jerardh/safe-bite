@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:safebite/util/appColor.dart';
 
 class AppText {
   static const title = "NutriLens";
+  static const numclasses = 80; //Number of food classes
   final TextStyle primaryStyle = GoogleFonts.lato(
       fontSize: 30,
       color: AppColor.primaryDarkest,

@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:safebite/util/AppText.dart';
 
 class Heading extends StatelessWidget {
+  const Heading({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Text(

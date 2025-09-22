@@ -6,6 +6,8 @@ import 'package:safebite/util/appColor.dart';
 class SignIn extends StatefulWidget {
   var userName;
   var passWord;
+
+  SignIn({super.key});
   @override
   State<StatefulWidget> createState() {
     return SignInState();
@@ -34,7 +36,7 @@ class SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.all(50.0),
+        padding: const EdgeInsets.all(50.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -55,13 +57,13 @@ class SignInState extends State<SignIn> {
             const SizedBox(height: 24),
             ElevatedButton(
                 onPressed: () => {login()},
-                // onPressed: _login,
-                child: const Text("Login"),
                 style: ElevatedButton.styleFrom(
                     textStyle: AppText().textStyle,
                     backgroundColor: AppColor.primaryDarker,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10))))),
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)))),
+                // onPressed: _login,
+                child: const Text("Login")),
           ],
         ));
   }

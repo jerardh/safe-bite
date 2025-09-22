@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:safebite/firebase_options.dart';
-import 'package:safebite/screens/home/components/Heading.dart';
-import 'package:safebite/screens/home/home.dart';
 import 'package:safebite/screens/signin/signIn.dart';
 import 'package:safebite/util/util.dart';
 import 'package:safebite/util/appColor.dart';

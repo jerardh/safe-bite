@@ -9,6 +9,8 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:path_provider/path_provider.dart';
 
 class QRImagePicker extends StatefulWidget {
+  const QRImagePicker({super.key});
+
   @override
   _QRImagePickerState createState() => _QRImagePickerState();
 }
@@ -87,14 +89,14 @@ class _QRImagePickerState extends State<QRImagePicker> {
               ),
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           ImageQunatity(),
 
           //  Only show UploadButton when _pickedImage is loaded
           if (_pickedImage != null)
             UploadButton(ImageFile: _pickedImage!)
           else
-            CircularProgressIndicator(), // optional loader
+            const CircularProgressIndicator(), // optional loader
         ],
       ),
     );
@@ -106,7 +108,7 @@ class _QRImagePickerState extends State<QRImagePicker> {
       child: Container(
         width: 40,
         height: 40,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           border: Border(
             top: BorderSide(color: AppColor.primaryDarkest, width: 4),
             left: BorderSide(color: AppColor.primaryDarkest, width: 4),

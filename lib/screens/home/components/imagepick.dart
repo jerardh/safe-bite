@@ -8,6 +8,8 @@ import 'dart:io';
 import 'package:safebite/screens/home/components/ImageQuantity.dart';
 
 class ImagePick extends StatefulWidget {
+  const ImagePick({super.key});
+
   @override
   State<ImagePick> createState() {
     return ImagePickState();
@@ -18,7 +20,7 @@ class ImagePickState extends State<ImagePick> {
   @override
   Widget build(BuildContext context) {
     return (Padding(
-        padding: EdgeInsets.all(30),
+        padding: const EdgeInsets.all(30),
         child: SizedBox(
             height: 600,
             width: double.infinity,
@@ -30,9 +32,9 @@ class ImagePickState extends State<ImagePick> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Text("Scan Your Food", style: AppText().secondaryStyle),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     SizedBox(width: 400, child: QRImagePicker()),
                   ],
                 )))));
