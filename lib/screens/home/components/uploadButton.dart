@@ -48,7 +48,9 @@ class UploadButton extends StatelessWidget {
         context,
         MaterialPageRoute(
           builder: (context) => FoodAnalysis(
-              foodname: classname, probs: data['prediction_prob'], foodImage: ImageFile),
+              foodname: classname,
+              probs: data['prediction_prob'],
+              foodImage: ImageFile),
         ),
       );
     } else {

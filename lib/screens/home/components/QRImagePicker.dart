@@ -17,7 +17,7 @@ class QRImagePicker extends StatefulWidget {
 
 class _QRImagePickerState extends State<QRImagePicker> {
   File? _pickedImage;
-
+  var _quantity = "300.00"; //300 grams as initial value
   @override
   void initState() {
     super.initState();
@@ -50,6 +50,13 @@ class _QRImagePickerState extends State<QRImagePicker> {
         _pickedImage = File(pickedFile.path);
       });
     }
+  }
+
+  void handleChildQuantity(String quantity) {
+    //updates the quantitiy from ImageQuantity
+    setState(() {
+      _quantity = quantity;
+    });
   }
 
   @override
@@ -90,7 +97,9 @@ class _QRImagePickerState extends State<QRImagePicker> {
             ),
           ),
           const SizedBox(height: 20),
-          ImageQunatity(),
+          ImageQunatity(
+            onDataChanged: handleChildQuantity,
+          ),
 
           //  Only show UploadButton when _pickedImage is loaded
           if (_pickedImage != null)

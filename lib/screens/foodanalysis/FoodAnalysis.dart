@@ -3,7 +3,9 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:safebite/screens/foodanalysis/components/NutritionTile.dart';
 import 'package:safebite/util/AppText.dart';
+import 'package:safebite/util/appColor.dart';
 import 'package:safebite/util/util.dart';
 
 class FoodAnalysis extends StatefulWidget {
@@ -50,9 +52,30 @@ class FoodAnalysisState extends State<FoodAnalysis> {
                                   width: 150,
                                   fit: BoxFit.cover)),
                           SizedBox(width: 50),
-                          Text(widget.foodname, style: AppText().secondaryStyle)
+                          Column(children: [
+                            Text(widget.foodname,
+                                style: AppText().secondaryStyle),
+                            SizedBox(height: 10),
+                            Container(
+                              width: 100,
+                              height: 100,
+                              decoration: BoxDecoration(
+                                color:
+                                    AppColor.primaryDarker, // Background color
+                                shape: BoxShape.circle, // Makes it a circle
+                              ),
+                              child: Center(
+                                child: Text(
+                                  "\t\t300.00\nCalories",
+                                  style:AppText().textStyle
+                                ),
+                              ),
+                            )
+                          ])
                         ],
-                      )
+                      ),
+                      SizedBox(height: 20),
+                      Nutritiontile(name: "Fat", value: 10)
                     ]))));
   }
 }
