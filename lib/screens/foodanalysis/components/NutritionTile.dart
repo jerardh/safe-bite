@@ -13,7 +13,7 @@ class Nutritiontile extends StatelessWidget {
       height: 40,
       padding: EdgeInsets.all(4),
       decoration: BoxDecoration(
-        color: AppColor.primary,
+        color: AppColor.secondary,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
@@ -23,8 +23,7 @@ class Nutritiontile extends StatelessWidget {
           )
         ],
       ),
-      child:
-          Center(child: Text("Fat", style: AppText().secondaryhintTextStyle)),
+      child: Center(child: Text(name+"\t"+value.toString()+" g", style: AppText().hintTextStyle)),
     ));
   }
 }

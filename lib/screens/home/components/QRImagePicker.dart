@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:safebite/screens/home/components/ImageQuantity.dart';
 import 'package:safebite/screens/home/components/uploadButton.dart';
+import 'package:safebite/util/AppCircularProgress.dart';
 import 'package:safebite/util/appColor.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:path_provider/path_provider.dart';
@@ -105,7 +106,7 @@ class _QRImagePickerState extends State<QRImagePicker> {
           if (_pickedImage != null)
             UploadButton(ImageFile: _pickedImage!)
           else
-            const CircularProgressIndicator(), // optional loader
+            Appcircularprogress() // optional loader
         ],
       ),
     );
