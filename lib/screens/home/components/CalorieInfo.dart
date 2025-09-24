@@ -3,6 +3,8 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:safebite/util/appColor.dart';
 
 class Calorieinfo extends StatefulWidget {
+  const Calorieinfo({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return CalorieInfoState();
@@ -24,20 +26,20 @@ class CalorieInfoState extends State<Calorieinfo> {
               radius: radius,
               lineWidth: linewidth,
               percent: carbs,
-              center: Text("Carbs\n " + carbs.toString()),
+              center: Text("Carbs\n $carbs"),
               progressColor: AppColor.primaryDarker,
             ),
             CircularPercentIndicator(
                 radius: radius,
                 lineWidth: linewidth,
                 percent: protein,
-                center: Text("Protein\n " + protein.toString()),
+                center: Text("Protein\n $protein"),
                 progressColor: AppColor.primaryDarker),
             CircularPercentIndicator(
                 radius: radius,
                 lineWidth: linewidth,
                 percent: calories,
-                center: Text("Calories\n " + calories.toString()),
+                center: Text("Calories\n $calories"),
                 progressColor: AppColor.primaryDarker)
           ],
         )));

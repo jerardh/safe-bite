@@ -7,6 +7,8 @@ import 'package:safebite/util/appColor.dart';
 import 'package:safebite/util/util.dart';
 
 class Home extends StatefulWidget {
+  const Home({super.key});
+
   @override
   State<Home> createState() {
     return HomeState();
@@ -16,6 +18,7 @@ class Home extends StatefulWidget {
 class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    print("started app");
     return Scaffold(
         appBar: Util().appBar,
         body: SingleChildScrollView(

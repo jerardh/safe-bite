@@ -1,8 +1,12 @@
+import 'dart:ffi';
+
 import 'package:safebite/util/AppColor.dart';
 import 'package:safebite/util/AppText.dart';
 import 'package:flutter/material.dart';
 
 class ImageQunatity extends StatefulWidget {
+  final Function(String) onDataChanged;
+  const ImageQunatity({super.key, required this.onDataChanged});
   @override
   State<StatefulWidget> createState() {
     return ImageQuantityState();
@@ -11,7 +15,8 @@ class ImageQunatity extends StatefulWidget {
 
 class ImageQuantityState extends State<ImageQunatity> {
   var _quantity = 0.3; //300 grams as initial value
-  TextEditingController _controller = TextEditingController(text: "300.00");
+  final TextEditingController _controller =
+      TextEditingController(text: "300.00");
   @override
   Widget build(BuildContext context) {
     return (Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
@@ -39,6 +44,7 @@ class ImageQuantityState extends State<ImageQunatity> {
                     onChanged: (String value) {
                       setState(() {
                         _quantity = double.parse(value) / 1000;
+                        widget.onDataChanged(value);
                       });
                     },
                     maxLength: 6,
@@ -49,9 +55,8 @@ class ImageQuantityState extends State<ImageQunatity> {
                             borderRadius: BorderRadius.circular(8)))))
           ]),
       Container(
-          child: Text("grams",
-              style: AppText().hintTextStyle),
-          margin: EdgeInsets.only(right: 30, top: 5))
+          margin: const EdgeInsets.only(right: 30, top: 5),
+          child: Text("grams", style: AppText().hintTextStyle))
     ]));
   }
 }

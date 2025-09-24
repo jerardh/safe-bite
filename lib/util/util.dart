@@ -5,4 +5,21 @@ import 'package:safebite/util/appColor.dart';
 class Util {
   static const title = "Safe Bite";
   var appBar = AppBar(title: Heading(), backgroundColor: AppColor.primary);
+  var appTextFieldDecoration = InputDecoration(
+    floatingLabelStyle: TextStyle(color: AppColor.primaryDarkest),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(5),
+      borderSide: BorderSide(
+        color: AppColor.primaryDarkest,
+        width: 1.0,
+      ),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(5),
+      borderSide: BorderSide(
+        color: AppColor.primaryDarkest,
+        width: 2.0,
+      ),
+    ),
+  );
 }
