@@ -6,6 +6,8 @@ import 'package:safebite/util/AppText.dart';
 import 'package:safebite/util/HashingHelper.dart';
 import 'package:safebite/util/appColor.dart';
 import 'package:safebite/util/util.dart';
+import 'package:flutter/gestures.dart';
+import 'package:safebite/screens/signup/SignUp.dart';
 
 class SignIn extends StatefulWidget {
   var userName;
@@ -104,6 +106,27 @@ class SignInState extends State<SignIn> {
                         "Login",
                         style: AppText().textStyle,
                       )),
+            SizedBox(height: 50),
+            RichText(
+                text: TextSpan(
+              style: AppText().contenttextStyle,
+              children: [
+                const TextSpan(text: "Not Registered? "),
+                TextSpan(
+                  text: "Create an account",
+                  style: AppText().hintTextStyle,
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Scaffold(appBar: Util().appBar, body: SignUp()),
+                        ),
+                      );
+                    },
+                ),
+              ],
+            )),
           ],
         ));
   }
