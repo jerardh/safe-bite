@@ -27,55 +27,60 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController _allergyController = TextEditingController();
 
   Future<void> addUser() async {
-    setState(() {
-      _isLoading = true; // show loader
-    });
-    // Reference to the "users" collection
-    try {
-      CollectionReference users =
-          FirebaseFirestore.instance.collection('userInfo');
-      var firstname = _firstNameController.text.toString();
-      var lastname = _lastNameController.text.toString();
-      var email = _emailController.text.toString();
-      var password =
-          hashinghelper.hashString(_passwordController.text.toString());
-      var height = int.parse(_heightController.text);
-      var weight = int.parse(_weightController.text);
-      List<String> allergens = _allergyController.text
-          .toString()
-          .split(",")
-          .map((item) => item.trim())
-          .toList();
-      // Add a new user
-      await users.add({
-        'firstname': firstname,
-        'lastname': lastname,
-        'email': email,
-        'password': password,
-        'height': height,
-        'weight': weight,
-        'allergens': allergens,
-        'createdAt': FieldValue.serverTimestamp(), // timestamp
-      });
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("User added successfully")),
-      );
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Error: $e")),
-      );
-    } finally {
+    if (_formKey.currentState!.validate()) {
+      // Validation passed
+
       setState(() {
-        _isLoading = false; // hide loader
+        _isLoading = true; // show loader
       });
+      // Reference to the "users" collection
+      try {
+        CollectionReference users =
+            FirebaseFirestore.instance.collection('userInfo');
+        var firstname = _firstNameController.text.toString();
+        var lastname = _lastNameController.text.toString();
+        var email = _emailController.text.toString();
+        var password =
+            hashinghelper.hashString(_passwordController.text.toString());
+        var height = int.parse(_heightController.text);
+        var weight = int.parse(_weightController.text);
+        List<String> allergens = _allergyController.text
+            .toString()
+            .split(",")
+            .map((item) => item.trim())
+            .toList();
+        // Add a new user
+        await users.add({
+          'firstname': firstname,
+          'lastname': lastname,
+          'email': email,
+          'password': password,
+          'height': height,
+          'weight': weight,
+          'allergens': allergens,
+          'createdAt': FieldValue.serverTimestamp(), // timestamp
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("User added successfully"),
+            backgroundColor: AppColor.primaryDarker,
+          ),
+        );
+        Future.delayed(const Duration(milliseconds: 800), () {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+                builder: (context) =>
+                    Scaffold(appBar: Util().appBar, body: SignIn())),
+          );
+        });
+      } catch (e) {
+        print(e);
+      } finally {
+        setState(() {
+          _isLoading = false; // hide loader
+        });
+      }
     }
-    Future.delayed(const Duration(milliseconds: 800), () {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-            builder: (context) =>
-                Scaffold(appBar: Util().appBar, body: SignIn())),
-      );
-    });
   }
 
   @override
@@ -124,6 +129,12 @@ class _SignUpState extends State<SignUp> {
                       Expanded(
                         child: TextFormField(
                           controller: _firstNameController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "First name cannot be empty";
+                            }
+                            return null; // valid
+                          },
                           decoration: Util()
                               .appTextFieldDecoration
                               .copyWith(labelText: "First Name"),
@@ -136,6 +147,12 @@ class _SignUpState extends State<SignUp> {
                           decoration: Util()
                               .appTextFieldDecoration
                               .copyWith(labelText: "Last Name"),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "Last name cannot be empty";
+                            }
+                            return null; // valid
+                          },
                         ),
                       ),
                     ],
@@ -145,6 +162,15 @@ class _SignUpState extends State<SignUp> {
                   // Email
                   TextFormField(
                     controller: _emailController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Email cannot be empty";
+                      }
+                      if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+                        return "Enter a valid email address";
+                      }
+                      return null; // valid
+                    },
                     decoration: Util()
                         .appTextFieldDecoration
                         .copyWith(labelText: "Email"),
@@ -155,6 +181,15 @@ class _SignUpState extends State<SignUp> {
                   // Password
                   TextFormField(
                     controller: _passwordController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Password cannot be empty";
+                      }
+                      if (value.length < 6) {
+                        return "Password must be at least 6 characters";
+                      }
+                      return null; // valid
+                    },
                     decoration: Util()
                         .appTextFieldDecoration
                         .copyWith(labelText: "Password"),
@@ -165,6 +200,15 @@ class _SignUpState extends State<SignUp> {
                   // Confirm Password
                   TextFormField(
                     controller: _confirmPasswordController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Password cannot be empty";
+                      }
+                      if (value != _passwordController.text.toString()) {
+                        return "Passwords do not match";
+                      }
+                      return null; // valid
+                    },
                     decoration: Util()
                         .appTextFieldDecoration
                         .copyWith(labelText: "Confirm Password"),
@@ -177,6 +221,12 @@ class _SignUpState extends State<SignUp> {
                       Expanded(
                         child: TextFormField(
                           controller: _heightController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "Height cannot be empty";
+                            }
+                            return null; // valid
+                          },
                           decoration: Util()
                               .appTextFieldDecoration
                               .copyWith(labelText: "Height (cm)"),
@@ -187,6 +237,12 @@ class _SignUpState extends State<SignUp> {
                       Expanded(
                         child: TextFormField(
                           controller: _weightController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "Weight cannot be empty";
+                            }
+                            return null; // valid
+                          },
                           decoration: Util()
                               .appTextFieldDecoration
                               .copyWith(labelText: "Weight (kg)"),
