@@ -13,11 +13,13 @@ class FoodAnalysis extends StatefulWidget {
   final String foodname;
   final File foodImage;
   final double? probs;
+  final double? amount;
   const FoodAnalysis(
       {super.key,
       required this.foodname,
       required this.foodImage,
-      required this.probs});
+      required this.probs,
+      required this.amount});
   @override
   State<StatefulWidget> createState() {
     return FoodAnalysisState();
@@ -91,7 +93,15 @@ class FoodAnalysisState extends State<FoodAnalysis> {
                                           BoxShape.circle, // Makes it a circle
                                     ),
                                     child: Center(
-                                      child: Text("\t\t\t"+(foodData?["cps"]??"0").toString()+"\nCalories",
+                                      child: Text(
+                                          "\t\t\t" +
+                                              (foodData?["cps"] *
+                                                          widget.amount /
+                                                          (foodData?["size"] ??
+                                                              100) ??
+                                                      "0")
+                                                  .toString() +
+                                              "\nCalories",
                                           style: AppText().textStyle),
                                     ),
                                   )
@@ -99,18 +109,39 @@ class FoodAnalysisState extends State<FoodAnalysis> {
                               ],
                             ),
                             SizedBox(height: 20),
-                            Wrap(
-                              spacing: 20,
-                              runSpacing: 20,
-                              children: [
+                            Wrap(spacing: 20, runSpacing: 20, children: [
                               Nutritiontile(
                                   name: "carbs",
-                                  value: foodData?["carbs"] ?? 0),
+                                  value: foodData?["carbs"] *
+                                          widget.amount /
+                                          (foodData?["size"] ?? 100) ??
+                                      0),
                               Nutritiontile(
-                                  name: "fat", value: foodData?["fat"] ?? 0),
+                                  name: "fat",
+                                  value: foodData?["fat"] *
+                                          widget.amount /
+                                          (foodData?["size"] ?? 100) ??
+                                      0),
                               Nutritiontile(
                                   name: "protein",
-                                  value: foodData?["protein"] ?? 0)
+                                  value: foodData?["protein"] *
+                                          widget.amount /
+                                          (foodData?["size"] ?? 100) ??
+                                      0)
+                            ]),
+                            SizedBox(height: 20),
+                            Row(children: [
+                              ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: AppColor.primaryRed,
+                                      foregroundColor: Colors.white,
+                                      
+                                      shape: const RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10)))),
+                                  onPressed: ()=>{print("clicked")},
+                                  child: Text("allergic info"),
+                                  )
                             ])
                           ]))));
   }

@@ -10,7 +10,7 @@ import 'package:flutter/gestures.dart';
 import 'package:safebite/screens/signup/SignUp.dart';
 
 class SignIn extends StatefulWidget {
-  var userName;
+  var email;
   var passWord;
   SignIn({super.key});
   @override
@@ -22,7 +22,7 @@ class SignIn extends StatefulWidget {
 class SignInState extends State<SignIn> {
   final CollectionReference userInfo =
       FirebaseFirestore.instance.collection('userInfo');
-  final TextEditingController _userNameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _isLoading = false;
   Hashinghelper hashinghelper = Hashinghelper();
@@ -30,11 +30,11 @@ class SignInState extends State<SignIn> {
     setState(() {
       _isLoading = true;
     });
-    String userName = _userNameController.text.trim();
+    String email = _emailController.text.trim();
     String password = hashinghelper.hashString(_passwordController.text.trim());
-    if (userName.isEmpty || password.isEmpty) {
+    if (email.isEmpty || password.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Please enter username and password")),
+        const SnackBar(content: Text("Please enter email and password")),
       );
       return;
     } else {
@@ -43,9 +43,9 @@ class SignInState extends State<SignIn> {
       var flag = false;
       for (var doc in querySnapshot.docs) {
         Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-        var storeduserId = data['userName'];
-        var storedpassword = data['passWord'];
-        if (storeduserId == userName && password == storedpassword) {
+        var storeduserId = data['email'];
+        var storedpassword = data['password'];
+        if (storeduserId == email && password == storedpassword) {
           flag = true;
           Navigator.pushReplacement(
             context,
@@ -56,7 +56,7 @@ class SignInState extends State<SignIn> {
       }
       if (!flag) {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Text("Please enter a valid username and password")));
+            content: Text("Please enter a valid email and password")));
       }
     }
     setState(() {
@@ -75,9 +75,9 @@ class SignInState extends State<SignIn> {
             Text("Sign In", style: AppText().secondaryStyle),
             SizedBox(height: 20),
             TextField(
-              controller: _userNameController,
+              controller: _emailController,
               decoration:
-                  Util().appTextFieldDecoration.copyWith(labelText: "Username"),
+                  Util().appTextFieldDecoration.copyWith(labelText: "email"),
             ),
             const SizedBox(height: 20),
             TextField(
@@ -120,7 +120,8 @@ class SignInState extends State<SignIn> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Scaffold(appBar: Util().appBar, body: SignUp()),
+                          builder: (context) =>
+                              Scaffold(appBar: Util().appBar, body: SignUp()),
                         ),
                       );
                     },

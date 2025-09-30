@@ -55,7 +55,7 @@ class _UploadButtonState extends State<UploadButton> {
 
     try {
       print("Got final image");
-      final url = Uri.parse("http://192.168.0.116:5000/predict");
+      final url = Uri.parse("http://192.168.1.11:5000/predict");
       var request = http.MultipartRequest('POST', url);
       request.files.add(await http.MultipartFile.fromPath(
         'image',
@@ -79,6 +79,7 @@ class _UploadButtonState extends State<UploadButton> {
               foodname: classname,
               probs: data['prediction_prob'],
               foodImage: widget.ImageFile,
+              amount: 100,
             ),
           ),
         );

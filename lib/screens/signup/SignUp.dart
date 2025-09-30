@@ -41,7 +41,7 @@ class _SignUpState extends State<SignUp> {
         var lastname = _lastNameController.text.toString();
         var email = _emailController.text.toString();
         var password =
-            hashinghelper.hashString(_passwordController.text.toString());
+            hashinghelper.hashString(_passwordController.text.trim());
         var height = int.parse(_heightController.text);
         var weight = int.parse(_weightController.text);
         List<String> allergens = _allergyController.text
