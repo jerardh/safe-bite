@@ -55,7 +55,9 @@ class _UploadButtonState extends State<UploadButton> {
 
     try {
       print("Got final image");
-      final url = Uri.parse("http://192.168.1.11:5000/predict");
+      String tempurl = "${Util.host}predict";
+      final url = Uri.parse(tempurl);
+      //print("URL=" + tempurl);
       var request = http.MultipartRequest('POST', url);
       request.files.add(await http.MultipartFile.fromPath(
         'image',

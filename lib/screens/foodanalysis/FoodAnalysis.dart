@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:safebite/screens/allergeninfo/AllergenInfo.dart';
 import 'package:safebite/screens/foodanalysis/components/NutritionTile.dart';
 import 'package:safebite/util/AppCircularProgress.dart';
 import 'package:safebite/util/AppText.dart';
@@ -139,7 +140,10 @@ class FoodAnalysisState extends State<FoodAnalysis> {
                                       shape: const RoundedRectangleBorder(
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(10)))),
-                                  onPressed: ()=>{print("clicked")},
+                                  onPressed: ()=>{Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => Allergeninfo(foodName: widget.foodname)),
+          )},
                                   child: Text("allergic info"),
                                   )
                             ])
