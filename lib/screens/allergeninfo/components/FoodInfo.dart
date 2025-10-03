@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:safebite/util/AppText.dart';
+import 'package:safebite/util/util.dart';
 
 class FoodInfo extends StatelessWidget {
   final String foodName;
@@ -13,53 +14,52 @@ class FoodInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
-      elevation: 6,
-      margin: const EdgeInsets.all(16),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Food Name
-            Text(
-              foodName,
-              style: AppText().secondaryStyle
-            ),
-            const SizedBox(height: 10),
-
-            // Ingredients Title
-            Text(
-              "Ingredients:",
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: Colors.grey[700],
+    return Scaffold(
+        appBar: Util().appBar,
+        body: Container(
+            width: 600,
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5),
               ),
-            ),
-            const SizedBox(height: 8),
+              elevation: 3,
+              margin: const EdgeInsets.all(10),
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    // Food Name
+                    Text(foodName, style: AppText().secondaryStyle),
+                    const SizedBox(height: 10),
 
-            // Ingredient List
-            ...ingredients.map(
-              (item) => Row(
-                children: [
-                  const Icon(Icons.check_circle, size: 18, color: Colors.green),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      item,
-                      style: const TextStyle(fontSize: 14),
+                    // Ingredients Title
+                    Text(
+                      "Ingredients:",
+                      style: AppText().secondaryStyle,
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 8),
+
+                    // Ingredient List
+                    ...ingredients.map(
+                      (item) => Row(
+                        children: [
+                          const Icon(Icons.food_bank,
+                              size: 18, color: Colors.green),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              item,
+                              style: AppText().analysistextStyle,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-          ],
-        ),
-      ),
-    );
+            )));
   }
 }

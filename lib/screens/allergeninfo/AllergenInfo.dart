@@ -1,7 +1,5 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:safebite/screens/allergeninfo/components/FoodInfo.dart';
 import 'package:safebite/util/AppCircularProgress.dart';
 import 'package:safebite/util/util.dart';
@@ -9,17 +7,13 @@ import 'package:http/http.dart' as http;
 
 class Allergeninfo extends StatefulWidget {
   final String foodName;
-  const Allergeninfo({
-    super.key,
-    required this.foodName,
-  });
+  const Allergeninfo({super.key, required this.foodName});
+
   @override
-  State<StatefulWidget> createState() {
-    return AllergeninfoState();
-  }
+  State<Allergeninfo> createState() => _AllergeninfoState();
 }
 
-class AllergeninfoState extends State<Allergeninfo> {
+class _AllergeninfoState extends State<Allergeninfo> {
   Map<String, dynamic>? ingredients;
   bool isLoading = false;
 
@@ -31,41 +25,49 @@ class AllergeninfoState extends State<Allergeninfo> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: Util().appBar,
-        body: isLoading
-            ? Center(
-                widthFactor: 40, heightFactor: 40, child: Appcircularprogress())
-            : FoodInfo(
-                foodName: widget.foodName,
-                ingredients: ingredients?["ingredients"] ?? [],
-              ));
+    List<String> ingrs =
+        (ingredients != null && ingredients!.containsKey("ingredients"))
+            ? (ingredients!["ingredients"] as List).cast<String>()
+            : [];
+
+    return (FoodInfo(foodName: widget.foodName, ingredients: ingrs));
   }
 
   void getIngredients(String foodName) async {
-    setState(() => isLoading = true);
+    print("called getIngrediients");
+    setState(() => {isLoading = true});
 
-    final url = Uri.https(
-      Util.host,
-      "get_food_info",
-      {"dish": foodName},
+    final url = Uri(
+      scheme: "http",
+      host: "192.168.1.11",
+      port: 5000,
+      path: "/get_food_info",
+      queryParameters: {"dish": foodName},
     );
 
     try {
+      print("Trying to call ");
       final response = await http.get(url);
-
       if (response.statusCode == 200) {
         setState(() {
           ingredients = jsonDecode(response.body);
+          print("Results: $ingredients['ingredients']");
         });
-        print("Results: $ingredients");
+        print("Results: $ingredients['ingredients']");
       } else {
-        print("Failed with code: ${response.statusCode}");
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Failed with code: ${response.statusCode}")),
+        );
       }
     } catch (e) {
-      print("Error: $e");
+      print(e);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Error: $e")),
+      );
     } finally {
-      setState(() => isLoading = false);
+      if (mounted) {
+        setState(() => isLoading = false);
+      }
     }
   }
 }

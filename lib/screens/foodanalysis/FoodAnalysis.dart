@@ -133,19 +133,23 @@ class FoodAnalysisState extends State<FoodAnalysis> {
                             SizedBox(height: 20),
                             Row(children: [
                               ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: AppColor.primaryRed,
-                                      foregroundColor: Colors.white,
-                                      
-                                      shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10)))),
-                                  onPressed: ()=>{Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => Allergeninfo(foodName: widget.foodname)),
-          )},
-                                  child: Text("allergic info"),
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: AppColor.primaryRed,
+                                    foregroundColor: Colors.white,
+                                    shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10)))),
+                                onPressed: () => {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const Allergeninfo(
+                                                foodName: "jalebi")),
                                   )
+                                },
+                                child: Text("allergic info"),
+                              )
                             ])
                           ]))));
   }
