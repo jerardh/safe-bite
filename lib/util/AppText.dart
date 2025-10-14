@@ -17,4 +17,6 @@ class AppText {
       fontSize: 15, color: Colors.white, fontWeight: FontWeight.w800);
   final TextStyle analysistextStyle = GoogleFonts.lato(
       fontSize: 20, color: AppColor.primaryDarker, fontWeight: FontWeight.w800);
+  final TextStyle contenttextStyle = GoogleFonts.lato(
+      fontSize: 15, color: AppColor.textSecondary, fontWeight: FontWeight.w600);
 }
