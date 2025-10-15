@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:safebite/screens/activitysuggestion/ActitvitySuggestion.dart';
 import 'package:safebite/screens/allergeninfo/AllergenInfo.dart';
 import 'package:safebite/screens/foodanalysis/components/NutritionTile.dart';
 import 'package:safebite/util/AppCircularProgress.dart';
@@ -148,6 +149,24 @@ class FoodAnalysisState extends State<FoodAnalysis> {
                                   )
                                 },
                                 child: Text("allergic info"),
+                              ),
+                              SizedBox(width: 15),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: AppColor.primaryDark,
+                                    foregroundColor: Colors.white,
+                                    shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10)))),
+                                onPressed: () => {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ActivitySuggestion()),
+                                  )
+                                },
+                                child: Text("Exercise Suggestion"),
                               )
                             ])
                           ]))));

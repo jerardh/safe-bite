@@ -4,8 +4,8 @@ import 'package:safebite/util/appColor.dart';
 
 class Util {
   static const title = "Safe Bite";
-  static const host = "http://192.168.0.120:5000/";
-  static const hostname = "192.168.0.120";
+  static const host = "http://192.168.0.119:5000/";
+  static const hostname = "192.168.0.119";
   var appBar = AppBar(title: Heading(), backgroundColor: AppColor.primary);
   var appTextFieldDecoration = InputDecoration(
     floatingLabelStyle: TextStyle(color: AppColor.primaryDarkest),
