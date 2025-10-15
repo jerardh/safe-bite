@@ -13,6 +13,8 @@ class AppText {
       fontSize: 15, color: Colors.white, fontWeight: FontWeight.w800);
   final TextStyle hintTextStyle = GoogleFonts.lato(
       fontSize: 15, color: AppColor.primaryDarker, fontWeight: FontWeight.w800);
+  final TextStyle alertTextStyle = GoogleFonts.lato(
+      fontSize: 15, color: Colors.white, fontWeight: FontWeight.w800);
   final TextStyle secondaryhintTextStyle = GoogleFonts.lato(
       fontSize: 15, color: Colors.white, fontWeight: FontWeight.w800);
   final TextStyle analysistextStyle = GoogleFonts.lato(

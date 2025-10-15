@@ -6,12 +6,12 @@ import 'package:safebite/util/util.dart';
 class FoodInfo extends StatelessWidget {
   final String foodName;
   final List<String> ingredients;
-
-  const FoodInfo({
-    super.key,
-    required this.foodName,
-    required this.ingredients,
-  });
+  final List<String> allergens;
+  const FoodInfo(
+      {super.key,
+      required this.foodName,
+      required this.ingredients,
+      required this.allergens});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,8 @@ class FoodInfo extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // Dish Card
                 Card(
@@ -44,7 +45,7 @@ class FoodInfo extends StatelessWidget {
                         ),
                         SizedBox(width: 16),
                         Text(
-                          foodName,
+                          foodName.replaceAll("_", " "),
                           style: AppText().primaryStyle,
                         ),
                       ],
@@ -54,7 +55,7 @@ class FoodInfo extends StatelessWidget {
                 SizedBox(height: 20),
 
                 Text(
-                  "Ingredients",
+                  "Know your food",
                   style: AppText().secondaryStyle,
                   textAlign: TextAlign.center,
                 ),
@@ -71,16 +72,19 @@ class FoodInfo extends StatelessWidget {
                       mainAxisSpacing: 12,
                     ),
                     itemBuilder: (context, index) {
+                      bool isAllergen = allergens.contains(ingredients[index]);
                       return Card(
                         elevation: 4,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15),
                         ),
-                        color: Colors.white,
+                        color: isAllergen ? Colors.red : Colors.white,
                         child: Center(
                           child: Text(
                             ingredients[index],
-                            style: AppText().hintTextStyle,
+                            style: isAllergen
+                                ? AppText().alertTextStyle
+                                : AppText().hintTextStyle,
                             textAlign: TextAlign.center,
                           ),
                         ),

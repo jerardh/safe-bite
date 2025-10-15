@@ -81,7 +81,7 @@ class FoodAnalysisState extends State<FoodAnalysis> {
                                         fit: BoxFit.cover)),
                                 SizedBox(width: 20),
                                 Column(children: [
-                                  Text(widget.foodname,
+                                  Text(widget.foodname.replaceAll("_", " "),
                                       style: AppText().analysistextStyle),
                                   SizedBox(height: 10),
                                   Container(

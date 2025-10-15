@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:safebite/screens/allergeninfo/components/FoodInfo.dart';
 import 'package:safebite/util/AppCircularProgress.dart';
+import 'package:safebite/util/AppText.dart';
+import 'package:safebite/util/appColor.dart';
 import 'package:safebite/util/util.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,7 +18,9 @@ class Allergeninfo extends StatefulWidget {
 }
 
 class _AllergeninfoState extends State<Allergeninfo> {
-  Map<String, dynamic>? ingredients;
+  List<String>? ingredients;
+  List<String>? allergens;
+  Map<String, dynamic>? responsedata;
   bool isLoading = false;
 
   @override
@@ -27,7 +31,6 @@ class _AllergeninfoState extends State<Allergeninfo> {
 
   @override
   Widget build(BuildContext context) {
-    // Show circular progress indicator while loading
     if (isLoading) {
       return Scaffold(
         appBar: Util().appBar,
@@ -35,22 +38,15 @@ class _AllergeninfoState extends State<Allergeninfo> {
       );
     }
 
-    //Prepare ingredients list once data is fetched
-    List<String> ingrs =
-        (ingredients != null && ingredients!.containsKey("ingredients"))
-            ? (ingredients!["ingredients"] as List).cast<String>()
-            : [];
-
     return Scaffold(
       body: FoodInfo(
-        foodName: widget.foodName,
-        ingredients: ingrs,
-      ),
+          foodName: widget.foodName,
+          ingredients: ingredients ?? [],
+          allergens: allergens ?? []),
     );
   }
 
   Future<void> getIngredients(String foodName) async {
-    print("called getIngredients");
     setState(() => isLoading = true);
     final prefs = await SharedPreferences.getInstance();
     final email = prefs.getString('email');
@@ -63,14 +59,30 @@ class _AllergeninfoState extends State<Allergeninfo> {
     );
 
     try {
-      print("Trying to call $url");
       final response = await http.get(url);
 
       if (response.statusCode == 200) {
+        responsedata = jsonDecode(response.body);
+
         setState(() {
-          ingredients = jsonDecode(response.body);
+          ingredients = List<String>.from(responsedata!['ingredients'] ?? []);
+          allergens = List<String>.from(responsedata!['allergens'] ?? []);
+          if (!(allergens?.isEmpty ?? true)) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  "Food Contains allergens",
+                  style: AppText().alertTextStyle,
+                ),
+                duration: Duration(seconds: 5),
+                backgroundColor: AppColor.primaryRed,
+              ),
+            );
+          }
         });
-        print("Results: ${ingredients?['ingredients']}");
+
+        print("Ingredients: $ingredients");
+        print("Allergens: $allergens");
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text("Failed with code: ${response.statusCode}")),
