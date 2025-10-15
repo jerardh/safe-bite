@@ -143,9 +143,8 @@ class FoodAnalysisState extends State<FoodAnalysis> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            const Allergeninfo(
-                                                foodName: "jalebi")),
+                                        builder: (context) => Allergeninfo(
+                                            foodName: widget.foodname)),
                                   )
                                 },
                                 child: Text("allergic info"),

@@ -8,6 +8,7 @@ import 'package:safebite/util/appColor.dart';
 import 'package:safebite/util/util.dart';
 import 'package:flutter/gestures.dart';
 import 'package:safebite/screens/signup/SignUp.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignIn extends StatefulWidget {
   var email;
@@ -47,6 +48,8 @@ class SignInState extends State<SignIn> {
         var storedpassword = data['password'];
         if (storeduserId == email && password == storedpassword) {
           flag = true;
+          final prefs = await SharedPreferences.getInstance();
+          await prefs.setString('email', email);
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => Home()),
