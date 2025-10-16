@@ -102,6 +102,7 @@ class FoodAnalysisState extends State<FoodAnalysis> {
                                                           (foodData?["size"] ??
                                                               100) ??
                                                       "0")
+                                                  .toStringAsFixed(2)
                                                   .toString() +
                                               "\nCalories",
                                           style: AppText().textStyle),
@@ -114,21 +115,24 @@ class FoodAnalysisState extends State<FoodAnalysis> {
                             Wrap(spacing: 20, runSpacing: 20, children: [
                               Nutritiontile(
                                   name: "carbs",
-                                  value: foodData?["carbs"] *
-                                          widget.amount /
-                                          (foodData?["size"] ?? 100) ??
+                                  value: (foodData?["carbs"] *
+                                              widget.amount /
+                                              (foodData?["size"] ?? 100))
+                                          .toStringAsFixed(2) ??
                                       0),
                               Nutritiontile(
                                   name: "fat",
-                                  value: foodData?["fat"] *
-                                          widget.amount /
-                                          (foodData?["size"] ?? 100) ??
+                                  value: (foodData?["fat"] *
+                                              widget.amount /
+                                              (foodData?["size"] ?? 100))
+                                          .toStringAsFixed(2) ??
                                       0),
                               Nutritiontile(
                                   name: "protein",
-                                  value: foodData?["protein"] *
-                                          widget.amount /
-                                          (foodData?["size"] ?? 100) ??
+                                  value: (foodData?["protein"] *
+                                              widget.amount /
+                                              (foodData?["size"] ?? 100))
+                                          .toStringAsFixed(2) ??
                                       0)
                             ]),
                             SizedBox(height: 20),
@@ -163,7 +167,13 @@ class FoodAnalysisState extends State<FoodAnalysis> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            ActivitySuggestion()),
+                                            ActivitySuggestion(
+                                                calorietoburn: foodData?[
+                                                            "cps"] *
+                                                        widget.amount /
+                                                        (foodData?["size"] ??
+                                                            100) ??
+                                                    0)),
                                   )
                                 },
                                 child: Text("Exercise Suggestion"),

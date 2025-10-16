@@ -77,6 +77,10 @@ flutter:
     - assets/images/app-image.png
     - assets/images/logo.png
     - assets/icon/fitness-icon.svg
+    - assets/icon/running-icon.svg
+    - assets/icon/up-icon.svg
+    - assets/icon/walking-icon.svg
+    - assets/icon/yoga-icon.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

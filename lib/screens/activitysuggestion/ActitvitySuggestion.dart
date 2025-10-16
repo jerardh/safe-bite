@@ -7,7 +7,8 @@ import 'package:safebite/util/util.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ActivitySuggestion extends StatefulWidget {
-  const ActivitySuggestion({super.key});
+  final calorietoburn;
+  const ActivitySuggestion({super.key, required this.calorietoburn});
 
   @override
   State<ActivitySuggestion> createState() => _ActivitySuggestionState();
@@ -35,6 +36,7 @@ class _ActivitySuggestionState extends State<ActivitySuggestion> {
           'name': raw['name']?.toString() ?? '',
           'calories': raw['cbh']?.toString() ?? '',
           'desc': raw['desc']?.toString() ?? '',
+          'icon': raw['icon']?.toString() ?? ''
         };
       }).toList();
 
@@ -88,12 +90,10 @@ class _ActivitySuggestionState extends State<ActivitySuggestion> {
                         color: AppColor.primary,
                       ),
                       const SizedBox(height: 16),
-                       Text(
-                        "Exercise Suggestions",
-                        style: AppText().secondaryStyle
-                      ),
+                      Text("Exercise Suggestions",
+                          style: AppText().secondaryStyle),
                       const SizedBox(height: 10),
-                       Text(
+                      Text(
                         "Stay active and energized throughout your day!",
                         style: AppText().analysistextStyle,
                         textAlign: TextAlign.center,
@@ -125,6 +125,12 @@ class _ActivitySuggestionState extends State<ActivitySuggestion> {
 
   // 🔹 Separated widget for cleaner code
   Widget _buildExerciseCard(Map<String, String> ex) {
+    //double time = widget.calorietoburn / ex["calories"];
+
+    String time = ((widget.calorietoburn / double.parse(ex["calories"]!))*60).toStringAsFixed(2);
+    if (ex["icon"] == null) {
+      print("No Icon");
+    }
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -142,7 +148,7 @@ class _ActivitySuggestionState extends State<ActivitySuggestion> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SvgPicture.asset(
-            ex["icon"]!, // ✅ corrected path
+            ex["icon"] ?? "assets/icon/running-icon.svg", // ✅ corrected path
             width: 50,
             height: 50,
             color: AppColor.primary,
@@ -154,7 +160,7 @@ class _ActivitySuggestionState extends State<ActivitySuggestion> {
           ),
           const SizedBox(height: 6),
           Text(
-            ex["calories"]!+" minutes" ?? "",
+            time!.toString() + " minutes" ?? "",
             textAlign: TextAlign.center,
             style: AppText().activitydurctextStyle,
           ),
@@ -162,7 +168,7 @@ class _ActivitySuggestionState extends State<ActivitySuggestion> {
           Text(
             ex["desc"] ?? "",
             textAlign: TextAlign.center,
-            style:  AppText().activitydesctextStyle,
+            style: AppText().activitydesctextStyle,
           ),
         ],
       ),
