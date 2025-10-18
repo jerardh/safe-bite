@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:safebite/screens/activitysuggestion/ActitvitySuggestion.dart';
 import 'package:safebite/screens/allergeninfo/AllergenInfo.dart';
 import 'package:safebite/screens/foodanalysis/components/NutritionTile.dart';
 import 'package:safebite/util/AppCircularProgress.dart';
@@ -81,7 +82,7 @@ class FoodAnalysisState extends State<FoodAnalysis> {
                                         fit: BoxFit.cover)),
                                 SizedBox(width: 20),
                                 Column(children: [
-                                  Text(widget.foodname,
+                                  Text(widget.foodname.replaceAll("_", " "),
                                       style: AppText().analysistextStyle),
                                   SizedBox(height: 10),
                                   Container(
@@ -101,6 +102,7 @@ class FoodAnalysisState extends State<FoodAnalysis> {
                                                           (foodData?["size"] ??
                                                               100) ??
                                                       "0")
+                                                  .toStringAsFixed(2)
                                                   .toString() +
                                               "\nCalories",
                                           style: AppText().textStyle),
@@ -113,21 +115,24 @@ class FoodAnalysisState extends State<FoodAnalysis> {
                             Wrap(spacing: 20, runSpacing: 20, children: [
                               Nutritiontile(
                                   name: "carbs",
-                                  value: foodData?["carbs"] *
-                                          widget.amount /
-                                          (foodData?["size"] ?? 100) ??
+                                  value: (foodData?["carbs"] *
+                                              widget.amount /
+                                              (foodData?["size"] ?? 100))
+                                          .toStringAsFixed(2) ??
                                       0),
                               Nutritiontile(
                                   name: "fat",
-                                  value: foodData?["fat"] *
-                                          widget.amount /
-                                          (foodData?["size"] ?? 100) ??
+                                  value: (foodData?["fat"] *
+                                              widget.amount /
+                                              (foodData?["size"] ?? 100))
+                                          .toStringAsFixed(2) ??
                                       0),
                               Nutritiontile(
                                   name: "protein",
-                                  value: foodData?["protein"] *
-                                          widget.amount /
-                                          (foodData?["size"] ?? 100) ??
+                                  value: (foodData?["protein"] *
+                                              widget.amount /
+                                              (foodData?["size"] ?? 100))
+                                          .toStringAsFixed(2) ??
                                       0)
                             ]),
                             SizedBox(height: 20),
@@ -143,12 +148,35 @@ class FoodAnalysisState extends State<FoodAnalysis> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            const Allergeninfo(
-                                                foodName: "jalebi")),
+                                        builder: (context) => Allergeninfo(
+                                            foodName: widget.foodname)),
                                   )
                                 },
                                 child: Text("allergic info"),
+                              ),
+                              SizedBox(width: 15),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: AppColor.primaryDark,
+                                    foregroundColor: Colors.white,
+                                    shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10)))),
+                                onPressed: () => {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ActivitySuggestion(
+                                                calorietoburn: foodData?[
+                                                            "cps"] *
+                                                        widget.amount /
+                                                        (foodData?["size"] ??
+                                                            100) ??
+                                                    0)),
+                                  )
+                                },
+                                child: Text("Exercise Suggestion"),
                               )
                             ])
                           ]))));

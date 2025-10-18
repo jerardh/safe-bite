@@ -13,10 +13,16 @@ class AppText {
       fontSize: 15, color: Colors.white, fontWeight: FontWeight.w800);
   final TextStyle hintTextStyle = GoogleFonts.lato(
       fontSize: 15, color: AppColor.primaryDarker, fontWeight: FontWeight.w800);
+  final TextStyle alertTextStyle = GoogleFonts.lato(
+      fontSize: 15, color: Colors.white, fontWeight: FontWeight.w800);
   final TextStyle secondaryhintTextStyle = GoogleFonts.lato(
       fontSize: 15, color: Colors.white, fontWeight: FontWeight.w800);
   final TextStyle analysistextStyle = GoogleFonts.lato(
       fontSize: 20, color: AppColor.primaryDarker, fontWeight: FontWeight.w800);
   final TextStyle contenttextStyle = GoogleFonts.lato(
       fontSize: 15, color: AppColor.textSecondary, fontWeight: FontWeight.w600);
+  final TextStyle activitydesctextStyle = GoogleFonts.lato(
+      fontSize: 15, color: AppColor.textSecondary, fontWeight: FontWeight.w600);
+  final TextStyle activitydurctextStyle = GoogleFonts.lato(
+      fontSize: 15, color: AppColor.textSecondary, fontWeight: FontWeight.w400);
 }

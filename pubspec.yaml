@@ -38,6 +38,8 @@ dependencies:
   tflite_flutter_helper: ^0.2.1
   crypto: ^3.0.6
   http: ^1.2.2
+  shared_preferences: ^2.2.2
+  flutter_svg: ^2.0.9
 
 
 
@@ -74,7 +76,11 @@ flutter:
     - assets/images/bir.png
     - assets/images/app-image.png
     - assets/images/logo.png
-    -  assets/model/model.tflite
+    - assets/icon/fitness-icon.svg
+    - assets/icon/running-icon.svg
+    - assets/icon/up-icon.svg
+    - assets/icon/walking-icon.svg
+    - assets/icon/yoga-icon.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
