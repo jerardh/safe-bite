@@ -15,6 +15,7 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
+  List<String> allergens = [];
   Hashinghelper hashinghelper = Hashinghelper();
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
@@ -25,6 +26,27 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController _heightController = TextEditingController();
   final TextEditingController _weightController = TextEditingController();
   final TextEditingController _allergyController = TextEditingController();
+  void _addAllergy() {
+    final newAllergy = _allergyController.text.trim();
+    if (newAllergy.isNotEmpty && !allergens.contains(newAllergy)) {
+      setState(() {
+        allergens.add(newAllergy);
+        _allergyController.clear();
+      });
+      /*ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('$newAllergy added to allergies.')),
+      );*/
+    }
+  }
+
+  void removeAllergy(String allergy) {
+    setState(() {
+      allergens.remove(allergy);
+    });
+    /*ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('$allergy removed from allergies.')),
+    );*/
+  }
 
   Future<void> addUser() async {
     if (_formKey.currentState!.validate()) {
@@ -44,11 +66,11 @@ class _SignUpState extends State<SignUp> {
             hashinghelper.hashString(_passwordController.text.trim());
         var height = int.parse(_heightController.text);
         var weight = int.parse(_weightController.text);
-        List<String> allergens = _allergyController.text
+        /*allergens = _allergyController.text
             .toString()
             .split(",")
             .map((item) => item.trim())
-            .toList();
+            .toList();*/
         // Add a new user
         await users.add({
           'firstname': firstname,
@@ -253,12 +275,52 @@ class _SignUpState extends State<SignUp> {
                   ),
                   const SizedBox(height: 16),
                   // Allergic Ingredients
-                  TextFormField(
-                    controller: _allergyController,
-                    decoration: Util().appTextFieldDecoration.copyWith(
-                        labelText: "Allergens",
-                        hintText: "Eg: Peanuts, Gluten, Milk"),
-                    maxLines: 2,
+                  Wrap(
+                    spacing: 8.0,
+                    children: allergens.map((allergy) {
+                      return Chip(
+                        label: Text(allergy,
+                            style:
+                                const TextStyle(color: AppColor.textPrimary)),
+                        backgroundColor: AppColor.secondary,
+                        deleteIconColor: Colors.black87,
+                        deleteIcon: const Icon(Icons.close, size: 18),
+                        onDeleted: () => removeAllergy(allergy),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          side: const BorderSide(color: AppColor.primaryDark),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          controller: _allergyController,
+                          decoration: Util().appTextFieldDecoration.copyWith(
+                                hintText:
+                                    'Allergens(Eg: Gluten, Shellfish, Soy)',
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 0),
+                              ),
+                          onFieldSubmitted: (value) => _addAllergy(),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      ElevatedButton.icon(
+                        onPressed: _addAllergy,
+                        icon: const Icon(Icons.add, color: Colors.white),
+                        label: const Text('Add',
+                            style: TextStyle(color: Colors.white)),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColor.primaryDarker,
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 14),
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 24),
 
