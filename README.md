@@ -27,5 +27,4 @@ SafeBite is a cross-platform mobile application designed to promote healthy eati
 
 ---
 
-## ⚙️ System Architecture
 
