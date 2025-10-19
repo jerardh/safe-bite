@@ -1,17 +1,31 @@
-# safebite
+# 🥗 SafeBite
 
-Flutter project aims at  providing personalized exercise recommendations based on calorie intake, nutritional values, and allergy detection from recognized foods
+SafeBite is a cross-platform mobile application designed to promote healthy eating through **AI-powered food image classification** and **nutritional analysis**. Built using **Flutter** for the front end and **Firebase** as the backend, SafeBite helps users recognize food items, estimate calories, and receive personalized activity suggestions to maintain a balanced lifestyle.
 
+---
 
-## Getting Started
+## 🚀 Features
 
-This project is a starting point for a Flutter application.
+- 🍽️ **Food Image Classification** – Identify food items using deep learning models.  
+- 🔢 **Calorie Estimation** – Automatically calculate estimated calories per meal.  
+- 🧠 **ML Integration** – Model developed in Python/Jupyter Notebook and deployed through Flask or Firebase Functions.  
+- 📱 **Cross-Platform UI** – Beautiful and responsive UI built using Flutter.  
+- ☁️ **Firebase Integration** – Real-time data storage, authentication, and analytics.  
+- 🏃‍♂️ **Activity Suggestions** – Personalized suggestions to burn consumed calories.  
 
-A few resources to get you started if this is your first Flutter project:
+---
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 🧩 Tech Stack
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+| Layer | Technology Used |
+|-------|------------------|
+| **Frontend** | Flutter (Dart) |
+| **Backend** | Flask / Firebase Functions |
+| **Database** | Firebase Firestore |
+| **Machine Learning** | Python, TensorFlow / Keras |
+| **Tools** | Jupyter Notebook, Android Studio, VS Code |
+
+---
+
+## ⚙️ System Architecture
+
