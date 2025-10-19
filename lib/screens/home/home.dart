@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:safebite/screens/home/components/CalorieInfo.dart';
 import 'package:safebite/screens/home/components/imagepick.dart' as picker;
+import 'package:safebite/util/AppDrawer.dart';
 import 'package:safebite/util/AppText.dart';
 import 'package:safebite/util/appColor.dart';
 import 'package:safebite/util/util.dart';
@@ -21,6 +22,7 @@ class HomeState extends State<Home> {
     print("started app");
     return Scaffold(
         appBar: Util().appBar,
+        drawer: AppDrawer(),
         body: SingleChildScrollView(
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
