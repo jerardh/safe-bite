@@ -71,11 +71,23 @@ class _AllergeninfoState extends State<Allergeninfo> {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(
-                  "Food Contains allergens",
+                  "Food Contains allergens"+
+                      (allergens != null ? ": ${allergens!.join(", ")}" : ""),
                   style: AppText().alertTextStyle,
                 ),
                 duration: Duration(seconds: 5),
                 backgroundColor: AppColor.primaryRed,
+              ),
+            );
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  "Food is Safe to Eat",
+                  style: AppText().alertTextStyle,
+                ),
+                duration: Duration(seconds: 5),
+                backgroundColor: AppColor.primaryDark,
               ),
             );
           }
